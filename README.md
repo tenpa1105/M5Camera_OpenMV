@@ -80,3 +80,5 @@ while True:
     uart.write(img.to_bytes())
     print(time.ticks_ms())
 ```
+
+![sample](/img/sample_binary_m5stack.jpeg) 
