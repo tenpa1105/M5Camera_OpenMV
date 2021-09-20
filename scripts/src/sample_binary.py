@@ -2,7 +2,7 @@ import image,camera,time
 from machine import UART
 import machine
 
-camera.init(0, format=2)
+camera.init(0, format=camera.GRAYSCALE)
 pin = machine.Pin(14, machine.Pin.OUT)
 pin.off()
 
