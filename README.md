@@ -54,7 +54,7 @@ make BOARD=GENERIC_CAM deploy
 グレイスケールで取得したQVGAサイズの画像を2値化、JPEGにエンコードし、UARTで送信するサンプルスクリプト
 
 A sample script that binarizes a grayscle image, encodes it to JPEG, and sends it via UART.
-```
+```python
 import image,camera,time
 from machine import UART
 import machine
