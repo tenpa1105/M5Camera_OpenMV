@@ -30,7 +30,7 @@ ESP-IDF のインストール後、本リポジトリをクローンしてくだ
 
 Clone this repository after installing ESP-IDF
 ```
-git clone  https://github.com/tenpa1105/M5Camera_OpenMV.git
+git clone --recursive https://github.com/tenpa1105/M5Camera_OpenMV.git
 ```
 クローン後、srcディレクトリに移動し、以下コマンドを入力してください
 ビルドが実行されます
