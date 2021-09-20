@@ -1,3 +1,9 @@
+/*
+ * This file is based on https://github.com/lemariva/micropython-camera-driver
+ *     Licensed under the Apache License, Version 2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 #include "esp_camera.h"
 #include "esp_log.h"
 
