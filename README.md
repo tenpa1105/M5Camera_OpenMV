@@ -47,5 +47,5 @@ M5Camera にファームウェアを書き込む場合は以下コマンドを�
 
 Enter the following command to flash.
 ```
-make BOARD=GENERIC_CAM 
+make BOARD=GENERIC_CAM deploy
 ```
