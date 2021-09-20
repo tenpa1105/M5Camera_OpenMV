@@ -70,9 +70,14 @@
 #include "extmod/modbluetooth.h"
 #endif
 
+#define MP_DUAL_PROC_TASK_COREID (1)
+
 // MicroPython runs as a task under FreeRTOS
 #define MP_TASK_PRIORITY        (ESP_TASK_PRIO_MIN + 1)
 #define MP_TASK_STACK_SIZE      (16 * 1024)
+
+#define MP_DUAL_PROC_TASK_PRIORITY        (ESP_TASK_PRIO_MIN)
+#define MP_DUAL_PROC_TASK_STACK_SIZE      (4 * 1024)
 
 // Set the margin for detecting stack overflow, depending on the CPU architecture.
 #if CONFIG_IDF_TARGET_ESP32C3
@@ -84,6 +89,8 @@
 typedef int (*dual_func_t)(int);
 volatile dual_func_t dual_func = 0;
 void *arg_list[16];
+
+static TaskHandle_t dual_proc_task_handle;
 
 int vprintf_null(const char *format, va_list ap) {
     // do nothing: this is used as a log target during raw repl mode
@@ -119,6 +126,16 @@ bool is_img_data_in_main_fb(uint8_t *data)
     return false;
 }
 
+
+void dual_proc_task(void *pvParameter) {
+  while (1)
+  {
+    if (dual_func){
+      (*dual_func)(1);
+      dual_func = 0;
+    }
+  }
+}
 
 void mp_task(void *pvParameter) {
     volatile uint32_t sp = (uint32_t)get_sp();
@@ -250,6 +267,7 @@ void app_main(void) {
         nvs_flash_init();
     }
     xTaskCreatePinnedToCore(mp_task, "mp_task", MP_TASK_STACK_SIZE / sizeof(StackType_t), NULL, MP_TASK_PRIORITY, &mp_main_task_handle, MP_TASK_COREID);
+    xTaskCreatePinnedToCore(dual_proc_task, "dual_proc_task", MP_DUAL_PROC_TASK_STACK_SIZE / sizeof(StackType_t), NULL, MP_DUAL_PROC_TASK_PRIORITY, &dual_proc_task_handle, MP_DUAL_PROC_TASK_COREID);
 }
 
 void nlr_jump_fail(void *val) {
