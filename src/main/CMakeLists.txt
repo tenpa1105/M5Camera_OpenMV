@@ -56,7 +56,7 @@ set(MICROPY_SOURCE_PORT
     ${PROJECT_DIR}/../micropython/ports/esp32/moduos.c
     ${PROJECT_DIR}/../micropython/ports/esp32/machine_bitstream.c
     ${PROJECT_DIR}/../micropython/ports/esp32/machine_timer.c
-    ${PROJECT_DIR}/machine_pin.c
+    ${PROJECT_DIR}/../micropython/ports/esp32/machine_pin.c
     ${PROJECT_DIR}/../micropython/ports/esp32/machine_touchpad.c
     ${PROJECT_DIR}/../micropython/ports/esp32/machine_adc.c
     ${PROJECT_DIR}/../micropython/ports/esp32/machine_dac.c

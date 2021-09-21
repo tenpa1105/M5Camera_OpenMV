@@ -29,6 +29,7 @@ typedef struct _camera_obj_t {
 
 STATIC camera_obj_t camera_obj;
 
+STATIC mp_obj_t camera_deinit();
 
 STATIC bool camera_init_helper(camera_obj_t *camera, size_t n_pos_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
       enum {
@@ -165,10 +166,15 @@ STATIC bool camera_init_helper(camera_obj_t *camera, size_t n_pos_args, const mp
 
 
 STATIC mp_obj_t camera_init(mp_uint_t n_pos_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
+    static bool initalized = false;
 
+    if (initalized){
+        camera_deinit();
+    }
     bool camera = camera_init_helper(&camera_obj, n_pos_args - 1, pos_args + 1, kw_args);
 
     if (camera) {
+        initalized =true;
         return mp_const_true;
     }
     else
@@ -205,6 +211,7 @@ STATIC mp_obj_t camera_capture(){
     switch (fb->format){
     case PIXFORMAT_GRAYSCALE:img_cobj->bpp =IMAGE_BPP_GRAYSCALE;  break;
     case PIXFORMAT_RGB565:img_cobj->bpp =IMAGE_BPP_RGB565;  break;
+    case PIXFORMAT_JPEG:img_cobj->bpp =IMAGE_BPP_JPEG;  break;
     default: 
         buf= mp_obj_new_bytes(fb->buf, fb->len); 
         //return the frame buffer back to the driver for reuse
