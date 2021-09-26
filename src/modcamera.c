@@ -211,7 +211,7 @@ STATIC mp_obj_t camera_capture(){
     switch (fb->format){
     case PIXFORMAT_GRAYSCALE:img_cobj->bpp =IMAGE_BPP_GRAYSCALE;  break;
     case PIXFORMAT_RGB565:img_cobj->bpp =IMAGE_BPP_RGB565;  break;
-    case PIXFORMAT_JPEG:img_cobj->bpp =IMAGE_BPP_JPEG;  break;
+    case PIXFORMAT_JPEG:img_cobj->bpp =fb->len;  break;
     default: 
         buf= mp_obj_new_bytes(fb->buf, fb->len); 
         //return the frame buffer back to the driver for reuse
