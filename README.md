@@ -10,7 +10,16 @@ It is built based on the source code of the repository below.
 + https://github.com/micropython/micropython
 + https://github.com/lemariva/micropython-camera-driver
 
+# How to use
 
+firmwareフォルダにビルド済みのbinファイルをおいています。以下コマンドで書き込んでください
+
+I have a pre-built bin file in the firmware folder. Please write with the following command.
+
+```
+pip install esptool
+esptool.py --port /dev/ttyUSB0 write_flash 0x8000 firmware/partition-table.bin 0x1000 firmware/bootloader.bin 0x10000 firmware/micropython.bin
+```
 
 # How to build
 
