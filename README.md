@@ -34,6 +34,9 @@ $ git clone -b v4.2 --recursive https://github.com/espressif/esp-idf.git
 $ cd esp-idf
 $ ./install.sh
 $ source export.sh
+$ cd components
+$ git clone https://github.com/espressif/esp32-camera.git
+
 ```
 ESP-IDF のインストール後、本リポジトリをクローンしてください
 
